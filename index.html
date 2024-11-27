@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shopping cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="images/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <!-- <style>
+      .hidden{
+        display: none;
+      }
+      .scale-0{
+        transform: scale(1)
+      }
+    </style> -->
+  </head>
+  <body class="bg-gray-100">
+    <h1 class="text-black text-2xl font-bold font-sans capitalize ml-8">
+      desserts
+    </h1>
+    <div
+      class="mx-10 my-5 overflow-hidden relative max-w-[65%] md:grid grid-cols-3 gap-6"
+      id="desserts-container"
+     >
+      <div class="product">
+        <img
+          src="images/image-waffle-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+         <!-- <div class="scale-0 bg-orange-900 text-white max-w-32 p-1 rounded-full flex gap-7 justify-center relative -top-3  mx-auto md:top-40 md:gap-6  lg:mx-auto" id="quantitty-manipulator">
+          <button id="increment">&plus;</button>
+          <label for="">2</label>
+           <button id="decrement">&minus;</button>
+        </div> -->
+        
+        <img
+          src="images/image-waffle-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+
+        <div id="desserts-cards"></div>
+      </div>
+      <div class="product">
+        <img
+          src="images/image-creme-brulee-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+
+        <img
+          src="images/image-creme-brulee-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-macaron-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+
+        <img
+          src="images/image-macaron-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-tiramisu-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+        <img
+          src="images/image-tiramisu-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-baklava-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+        <img
+          src="images/image-baklava-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-meringue-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+        <img
+          src="images/image-meringue-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-cake-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+
+        <img
+          src="images/image-cake-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-brownie-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+        <img
+          src="images/image-brownie-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+
+      <div class="product">
+        <img
+          src="images/image-panna-cotta-mobile.jpg"
+          alt="nothing here"
+          class="rounded-md sm:block md:hidden"
+        />
+        <img
+          src="images/image-panna-cotta-tablet.jpg"
+          alt="nothing here"
+          class="hidden md:block rounded-md"
+        />
+        <div id="desserts-cards"></div>
+      </div>
+    </div>
+    <div
+      class="w-[80%] min-h-[40%] m-auto bg-white px-4 py-8 rounded-md md:max-w-[25%] md:absolute top-[8%] left-[73%]"
+    >
+      <h1 class="text-orange-500 font-bold capitalize text-lg" id="cart-number">
+        your cart(0)
+      </h1>
+      <div class="" id="img">
+        <img src="images/illustration-empty-cart.svg" alt="" class="m-auto" />
+        <p class="text-amber-900 text-sm font-semibold">
+          Your added items will appear here
+        </p>
+      </div>
+      <div class="ml-2 relative" id="selected-products"></div>
+
+      <div id="total-sub" class="hidden">
+        <p
+          class="flex justify-between text-gray-500 font-light capitalize mt-2"
+        >
+          order total
+          <span class="text-black font-bold text-lg" id="total"></span>
+        </p>
+        <div class="bg-red-50 px-3 py-2 rounded-lg mt-2 md:px-2 md:py-1">
+          <img src="images/icon-carbon-neutral.svg" alt="" class="" />
+          <p
+            class="text-[12.5px] ml-6 -mt-4 text-gray-400 md:text-sm text-center"
+          >
+            this is a
+            <span class="font-bold text-black">carbon-neutral </span>delivery
+          </p>
+        </div>
+        <input
+          type="submit"
+          id="confirm"
+          value="confirm order"
+          class="bg-orange-900 text-white w-full mt-4 p-2 rounded-full capitalize cursor-pointer lg:hover:bg-orange-600"
+        />
+      </div>
+    </div>
+    <!-- pop up  -->
+
+    <div
+      class="transition-all delay-75 duration-100 scale-0  bg-white p-5 ml-3 rounded-md min-w-[90%]  absolute top-[240%]  z-10 md:top-[40%] md:left-28 md:p-10 md:min-w-[40%] md: lg:top-[28%] lg:ml-[10%] lg:max-w-[30%]" id="pop-up">
+      <div class="" id="img">
+        <img src="images/icon-order-confirmed.svg" alt="" class="size-8" />
+        <h1 class="text-black capitalize text-xl font-bold mt-6">
+          order confirmed
+        </h1>
+        <p class="text-gray-300 text-sm font-semibold">
+          we hope you enjoy your food
+        </p>
+      </div>
+      <div class="m-auto leading-7 mt-9 bg-red-50 w-full shadow-lg p-4 relative md:max-w-sm" id="confirm-order">
+</div>
+       <div id="total-sub" class="">
+            <p
+              class="flex justify-between text-gray-500 font-light capitalize mt-2"
+              >
+              order total
+              <span class="text-black font-bold text-lg" id="c-total"></span>
+            </p>
+          </div>
+        <input
+          type="submit"
+          id="reset"
+          value="start new order"
+          class="bg-orange-900 text-white w-[100%] ml-3 mt-4 p-2 rounded-full capitalize cursor-pointer lg:hover:bg-orange-600 md:w-[85%] md:ml-8"
+        />
+      </div>
+    </div>
+    <div class="hidden bg-black fixed top-0 left-0 right-0 bottom-0 opacity-55 z-[2] scale-1" id="overlay"></div>
+    <script src="add-to-cart.js"></script>
+  </body>
+</html>
