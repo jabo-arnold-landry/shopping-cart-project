@@ -101,24 +101,6 @@ function displayCartBtns() {
           >
           <p class="text-orange-700 font-bold">$${price.toFixed(2)}</p>
         </div>`;
-
-    container.addEventListener("click", (e) => {
-      if (e.target.classList.contains("btn")) {
-        container.innerHTML = "";
-        container.innerHTML = `
-         <div class="bg-orange-900 text-white max-w-32 p-1 rounded-full flex gap-7 justify-center relative -top-3  mx-auto md:-my-1 md:gap-6  lg:mx-auto" id="quantitty-manipulator">
-          <button class="quantity" id="increment">&plus;</button>
-          <label for="" id='q-number'></label>
-           <button class="quantity" id="decrement">&minus;</button>
-        </div>
-        <p class="text-gray-400 font-light text-lg capitalize">${name}</p>
-          <span class="font-semibold capitalize text-lg"
-            >${category}</span
-          >
-          <p class="text-orange-700 font-bold">$${price}</p>
-      `;
-      }
-    });
   });
 }
 displayCartBtns();
@@ -131,12 +113,20 @@ class ShopingCart {
   addItems(id, products) {
     // Find the product object from the products list
     const product = products.find((pro) => pro.id === id);
-    this.items.push({ ...product, quantity: 1 });
 
+    // Check if the product already exists in the cart
+    const existingItem = this.items.find((item) => item.id === id);
+
+    if (existingItem) {
+      // Product already exists, increment its quantity (assuming quantity exists)
+      existingItem.quantity++;
+    } else {
+      // Product doesn't exist, create a new object with quantity 1
+      this.items.push({ ...product, quantity: 1 });
+    }
     this.total = this.items.reduce((acc, item) => {
       acc + item.price * item.quantity, 0;
     });
-
     // Update total price
     this.total = this.items.reduce(
       (acc, item) => acc + item.price * item.quantity,
@@ -162,7 +152,7 @@ class ShopingCart {
       cartsContainer.innerHTML += `
       <h2 class="font-semibold capitalize text-sm">${item.name}</h2>
        <div class="flex gap-2">
-          <p class="text-orange-600 font-bold">${item.quantity}x</p>
+          <p class="text-orange-600 font-bold" id='number'>${item.quantity}x</p>
           <p class="text-gray-400">$${item.price.toFixed(2)}</p>
           <p class="text-orange-800">$${(item.price * item.quantity).toFixed(
             2
@@ -189,9 +179,9 @@ class ShopingCart {
     const dataId = parseInt(dataset);
     const productIndex = this.items.findIndex((item) => item.id === dataId);
     const removedProductId = this.items.find((item) => item.id === dataId);
-    this.total -= removedProductId.price * removedProductId.quantity;
     if (productIndex !== -1) {
       this.items.splice(productIndex, 1);
+      this.total -= removedProductId.price * removedProductId.quantity;
       this.addExtra();
       this.update();
     }
@@ -204,7 +194,6 @@ class ShopingCart {
     finalTotal.classList.remove("hidden");
     cartTotalNumber.textContent = `Your cart(${this.items.length})`;
   }
-
   orderConfirmation() {
     cTotal.textContent = `$${this.total.toFixed(2)}`;
     addedConfirmation.innerHTML = "";
