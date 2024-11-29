@@ -108,7 +108,7 @@ function displayCartBtns() {
         container.innerHTML = `
          <div class="bg-orange-900 text-white max-w-32 p-1 rounded-full flex gap-7 justify-center relative -top-3  mx-auto md:-my-1 md:gap-6  lg:mx-auto" id="quantitty-manipulator">
           <button class="quantity" id="increment">&plus;</button>
-          <label for="">2</label>
+          <label for="" id='q-number'></label>
            <button class="quantity" id="decrement">&minus;</button>
         </div>
         <p class="text-gray-400 font-light text-lg capitalize">${name}</p>
@@ -126,24 +126,17 @@ class ShopingCart {
   constructor() {
     this.items = [];
     this.total = 0;
+    this.quantity = 0;
   }
   addItems(id, products) {
     // Find the product object from the products list
     const product = products.find((pro) => pro.id === id);
+    this.items.push({ ...product, quantity: 1 });
 
-    // Check if the product already exists in the cart
-    const existingItem = this.items.find((item) => item.id === id);
-
-    if (existingItem) {
-      // Product already exists, increment its quantity (assuming quantity exists)
-      existingItem.quantity++;
-    } else {
-      // Product doesn't exist, create a new object with quantity 1
-      this.items.push({ ...product, quantity: 1 });
-    }
     this.total = this.items.reduce((acc, item) => {
       acc + item.price * item.quantity, 0;
     });
+
     // Update total price
     this.total = this.items.reduce(
       (acc, item) => acc + item.price * item.quantity,
@@ -153,14 +146,13 @@ class ShopingCart {
     images.classList.add("hidden");
     this.update();
   }
+
   globalEvnts(type, selector, callback, parent) {
     parent.addEventListener(type, (e) => {
       if (e.target.classList.contains(selector)) {
         callback(e);
       }
     });
-    const quantityBtns = document.getElementsByClassName("quantity");
-    console.log([...quantityBtns].forEach((btn) => console.log(btn)));
   }
 
   update() {
