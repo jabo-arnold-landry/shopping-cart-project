@@ -125,12 +125,12 @@ class ShopingCart {
       this.items.push({ ...product, quantity: 1 });
     }
     this.total = this.items.reduce((acc, item) => {
-      acc + item.price * item.quantity, 0;
+      (acc + item.price * item.quantity, 0);
     });
     // Update total price
     this.total = this.items.reduce(
       (acc, item) => acc + item.price * item.quantity,
-      0
+      0,
     );
     // displayed images and clearing out existing contents
     images.classList.add("hidden");
@@ -155,7 +155,7 @@ class ShopingCart {
           <p class="text-orange-600 font-bold" id='number'>${item.quantity}x</p>
           <p class="text-gray-400">$${item.price.toFixed(2)}</p>
           <p class="text-orange-800">$${(item.price * item.quantity).toFixed(
-            2
+            2,
           )}</p>
         </div>
      <img src="images/icon-remove-item.svg" alt="" class="remove border-2
@@ -170,7 +170,7 @@ class ShopingCart {
             this.removeItem(e.target.dataset.id);
           }
         },
-        cartsContainer
+        cartsContainer,
       );
       addedProductsDiv.appendChild(cartsContainer);
     });
@@ -195,6 +195,7 @@ class ShopingCart {
     cartTotalNumber.textContent = `Your cart(${this.items.length})`;
   }
   orderConfirmation() {
+    console.log(this.items);
     cTotal.textContent = `$${this.total.toFixed(2)}`;
     addedConfirmation.innerHTML = "";
     this.items.map((item) => {
