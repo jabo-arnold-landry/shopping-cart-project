@@ -229,6 +229,7 @@ class ShopingCart {
     finalTotal.classList.toggle("hidden");
     images.classList.toggle("hidden");
     addedConfirmation.innerHTML = ``;
+    return this.items;
   }
 }
 
