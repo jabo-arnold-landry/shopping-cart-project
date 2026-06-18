@@ -261,6 +261,15 @@ function removePopUp() {
   overlay.classList.add("hidden");
 }
 resetBtn.addEventListener("click", () => {
-  cart.reset();
+  const soldProducts = cart.reset();
+  console.log(soldProducts);
+
+  fetch("http://localhost:3000/payments", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(soldProducts),
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
   removePopUp();
 });
